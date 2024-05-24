@@ -18,6 +18,8 @@ import rutaPost from '../routes/vistaPost.routes.js'
 import rutaGet from '../routes/vistaGet.routes.js'
 import rutaDelete from '../routes/vistaDelete.routes.js'
 import rutaPut from '../routes/vistaPut.routes.js'
+import rutaPostTransferencia from '../routes/vistaPostTransferencia.routes.js'
+import rutaGetTransferencias from '../routes/vistaGetTransferencias.routes.js'
  
 
 // Creamos nuestro modelo o clase de servidor
@@ -37,7 +39,9 @@ class Server {
             rootPost:'/usuario',
             rootGet:'/usuarios',
             rootDelete:'/usuario',
-            rootPut:'/usuario'
+            rootPut:'/usuario',
+            rootPostTransferencia: '/transferencia',
+            rootGetTransferencias: '/transferencias'
             
         }
 
@@ -61,8 +65,9 @@ class Server {
         this.app.use( this.Paths.rootGet, rutaGet );
         this.app.use( this.Paths.rootDelete , rutaDelete );        
         this.app.use( this.Paths.rootPut , rutaPut );
-        
-        
+        this.app.use( this.Paths.rootPostTransferencia, rutaPostTransferencia );
+        this.app.use( this.Paths.rootGetTransferencias, rutaGetTransferencias );
+               
             
     }
 
