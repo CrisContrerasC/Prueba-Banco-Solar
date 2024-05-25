@@ -228,6 +228,8 @@
     let receptor = $("form:last select:last").val();
     let monto = $("#monto").val();
     let currentDate = moment();
+    let horaLocal = currentDate.locale('es-us').format('DD/MM/YYYY hh:mm:ss');
+    
     
     if (!monto || !emisor || !receptor) {
       alert("Debe seleccionar un emisor, receptor y monto a transferir");
@@ -243,14 +245,23 @@
           emisor,
           receptor,
           monto,
-          currentDate,
+          horaLocal,
         }),
       });
+
+      if (!response.ok) {
+            // Si la respuesta no es ok, lanzar un error
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Error desconocido');
+        }
       const data = await response.json();
+
+      alert("Transferencia realizada con éxito");
       location.reload();
     } catch (e) {
       console.log(e);
-      alert("Algo salió mal..." + e);
+      alert("Algo salió mal..." + e.message);
+      $("#monto").val("")
     }
   });
 
@@ -319,8 +330,9 @@
   getTransferencias();
 
   const formatDate = (date) => {
-    const dateFormat = moment(date).local().format("L");
-    const timeFormat = moment(date).local().format("LT");
+    const dateFormat = moment(date).format("L");
+    const timeFormat = moment(date).format("LT");
+    console.log(timeFormat)
     return `${dateFormat} ${timeFormat}`;
   };
   formatDate();

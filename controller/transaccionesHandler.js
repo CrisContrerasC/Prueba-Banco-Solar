@@ -6,7 +6,8 @@ export const postTransferencia = async (req, res) => {
         const insertData= await Post_Transferencia(postData);
        res.status(200).json({estado:'OK', insert: insertData.rows});
     } catch (error) {
-        res.status(500).json({ error: "Error al crear  nueva transferencia" });
+        console.error('Error al procesar la transferencia', error);
+        res.status(500).json({ error: "Error al realizar  nueva transferencia" });
     }
 }
  export const getTransferencias = async (req, res) => {

@@ -31,7 +31,7 @@ const Post_Transferencia = async (transferencia) => {
         await client.query('COMMIT');
         return result;
     } catch (error) {
-        await client.query('ROLLBACK');
+        await client.query('ROLLBACK');//Se cancela la transacción
         return console.error('Error al insertar transferencia', error.code, error.stack, error.message);
     } finally {
         if (client) {
