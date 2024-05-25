@@ -2,6 +2,7 @@ import pool from "../config/db.js";
 const Post_Transferencia = async (transferencia) => {
     let client;
     const values = Object.values(transferencia);
+    
     const consulta = {
         name: 'insert-Transferencia',
         text: 'INSERT INTO transferencias (emisor, receptor, monto, fecha) VALUES ($1, $2, $3, $4) RETURNING *',

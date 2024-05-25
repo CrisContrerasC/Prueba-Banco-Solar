@@ -32,11 +32,23 @@ export const deleteUsuario = async (req, res) => {
     }
 }
 
-export const putUsuario = async (req, res) => {
+/* export const putUsuario = async (req, res) => {
     try {
         const { id } = req.params;
         const { nombre, balance } = req.body;
         const putData = await Put_Usuario({ id, nombre, balance });
+        res.status(200).send(putData.rows);
+    } catch (error) {
+        res.status(500).json({ error: "Error al actualizar el usuario" });
+    }
+} */
+
+export const putUsuario = async (req, res) => {
+    try {
+        const { id } = req.query;
+        const { name, balance } = req.body;
+        const putData = await Put_Usuario({ id, name, balance });
+        console.log("Salida putData: ", putData)
         res.status(200).send(putData.rows);
     } catch (error) {
         res.status(500).json({ error: "Error al actualizar el usuario" });
